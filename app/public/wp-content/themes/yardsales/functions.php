@@ -1,6 +1,6 @@
 <?php
 
-function store_assets()
+function storeAssets()
 {
   wp_register_style("google_fonts", "https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700", array(), false, 'all');
   wp_register_style("google_fonts_2", "https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap", array(), false, 'all');
@@ -11,10 +11,10 @@ function store_assets()
   wp_enqueue_script("yard_sale_js", get_template_directory_uri() . "/assets/js/script.js");
 }
 
-add_action("wp_enqueue_scripts", "store_assets");
+add_action("wp_enqueue_scripts", "storeAssets");
 
 
-function store_theme_supports()
+function storeThemeSupports()
 {
   add_theme_support('title-tag');
   add_theme_support('post-thumbnails');
@@ -29,9 +29,9 @@ function store_theme_supports()
   );
 }
 
-add_action("after_setup_theme", "store_theme_supports");
+add_action("after_setup_theme", "storeThemeSupports");
 
-function store_add_menus()
+function storeAddMenus()
 {
   register_nav_menus(
     array(
@@ -41,4 +41,18 @@ function store_add_menus()
   );
 }
 
-add_action("after_setup_theme", "store_add_menus");
+add_action("after_setup_theme", "storeAddMenus");
+
+function storeAddSidebar()
+{
+  register_sidebar(
+    array(
+      'name' => 'Pie de página',
+      'id' => 'pie_pagina',
+      'before_widget' => '',
+      'after_widget' => '',
+    )
+  );
+}
+
+add_action("widgets_init", "storeAddSidebar");

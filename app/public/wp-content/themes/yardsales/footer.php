@@ -1,5 +1,5 @@
 <footer class="text-center my-4">
-  De LATAM con ⚽ para el mundo
+  <?php dynamic_sidebar('pie_pagina'); ?>
 </footer>
 <?php wp_footer(); ?>
 </body>
