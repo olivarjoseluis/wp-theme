@@ -56,3 +56,47 @@ function storeAddSidebar()
 }
 
 add_action("widgets_init", "storeAddSidebar");
+
+
+function storeAddCustomPostType()
+{
+  $labels = array(
+    'name' => 'Producto',
+    'singular_name' => 'Producto',
+    'all_items' => 'Todos los productos',
+    'add_new' => 'Añadir producto'
+  );
+
+  $args = array(
+    'labels'             => $labels,
+    'description'        => 'Productos para listar en un catálogos.',
+    'public'             => true,
+    'publicly_queryable' => true,
+    'show_in_menu'       => true,
+    'query_var'          => true,
+    'rewrite'            => array('slug' => 'producto'),
+    'capability_type'    => 'post',
+    'has_archive'        => true,
+    'hierarchical'       => false,
+    'menu_position'      => 5,
+    'supports'           => array('title', 'editor', 'author', 'thumbnail'),
+    'taxonomies'         => array('category'),
+    'show_in_rest'       => true,
+    'menu_icon'          => 'dashicons-cart'
+  );
+
+  register_post_type('product', $args);
+}
+
+add_action("init", "storeAddCustomPostType");
+
+
+function storeSigninMenu()
+{
+  $currentUser = wp_get_current_user();
+
+  $msg = is_user_logged_in() ? $currentUser->user_email : "Sign in";
+  echo $msg;
+}
+
+add_action("storeSignin", "storeSigninMenu");
