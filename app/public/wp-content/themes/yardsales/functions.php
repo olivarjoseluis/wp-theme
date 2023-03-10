@@ -16,9 +16,29 @@ add_action("wp_enqueue_scripts", "store_assets");
 
 function store_theme_supports()
 {
-  add_theme_support("title-tag");
-  add_theme_support("post-thumbnails");
-  add_theme_support("custom-logo", array("width" => 170, "height" => 35, "flex-width" => true, "flex-height" => true));
+  add_theme_support('title-tag');
+  add_theme_support('post-thumbnails');
+  add_theme_support(
+    'custom-logo',
+    array(
+      "width" => 170,
+      "height" => 35,
+      "flex-width" => true,
+      "flex-height" => true,
+    )
+  );
 }
 
 add_action("after_setup_theme", "store_theme_supports");
+
+function store_add_menus()
+{
+  register_nav_menus(
+    array(
+      'primary-menu' => "Menú principal",
+      'menu-responsive' => "Menú responsive"
+    )
+  );
+}
+
+add_action("after_setup_theme", "store_add_menus");
